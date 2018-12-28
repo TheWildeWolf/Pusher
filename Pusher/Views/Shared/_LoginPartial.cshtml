@@ -1,0 +1,66 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+        @*<ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                </li>
+                <li>
+                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+                </li>
+            </ul>*@
+        <div class="dropdown">
+            <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+                <span class="ml-2 d-none d-lg-block">
+                    <span class="text-default"> @UserManager.GetUserName(User)</span>
+                    <small class="text-muted d-block mt-1">Administrator</small>
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                <a class="dropdown-item" href="#">
+                    <i class="dropdown-icon fe fe-user"></i> Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                    <span class="float-right"><span class="badge badge-primary">6</span></span>
+                    <i class="dropdown-icon fe fe-mail"></i> Inbox
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="dropdown-icon fe fe-send"></i> Message
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                    <i class="dropdown-icon fe fe-help-circle"></i> Need help?
+                </a>
+                <a class="dropdown-item" href="#">
+                    <button type="submit" class="dropdown-icon fe fe-log-out">Sign out</button>
+                </a>
+            </div>
+        </div>
+    </form>
+}
+else
+{
+
+    @*<ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>*@
+    <div class="d-flex order-lg-2 ml-auto">
+        <div class="nav-item d-none d-md-flex">
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-sm btn-outline-primary">Register</a>
+        </div>
+        <div class="nav-item d-none d-md-flex">
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-sm btn-outline-success">Sign In</a>
+        </div>
+       
+    </div>
+}
